@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Agenda de Eventos</title>
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#121217;
+      --card:#1b1b23;
+      --muted:#bfbfc6;
+      --accent:#7c4dff; /* roxo */
+      --accent-2:#6633cc;
+    }
+    body{ background:var(--bg); color:var(--muted); }
+    .navbar{ background: linear-gradient(90deg, rgba(30,22,50,1) 0%, rgba(22,12,40,1) 100%); border-bottom:1px solid rgba(255,255,255,0.04); }
+    .card{ background:var(--card); color:var(--muted); }
+    a.nav-link, .navbar-brand { color: #efeefe; }
+    .btn-accent { background: var(--accent); border: none; color: white; }
+    .btn-accent:hover { background: var(--accent-2); }
+    .form-control, .form-select { background:#15151b; color:var(--muted); border:1px solid rgba(255,255,255,0.04); }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Agenda de Eventos</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Eventos</a></li>
+        {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'eventos:evento_create' %}">Novo Evento</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Sair</a></li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container py-4">
+  {% block content %}{% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
